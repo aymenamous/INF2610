@@ -1,0 +1,5 @@
+lib,user time,system time,elapsed time,page-faults,L1-dcache-load-misses
+serial,0.16,0.00,0:00.16,76,7321
+fork,0.17,0.00,0:00.06,279,15678
+pthread,1.03,0.00,0:00.29,85,13190768
+pth,0.17,0.00,0:00.17,89,7905
