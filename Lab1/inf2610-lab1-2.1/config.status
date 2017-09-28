@@ -437,7 +437,7 @@ Copyright (C) 2012 Free Software Foundation, Inc.
 This config.status script is free software; the Free Software Foundation
 gives unlimited permission to copy, distribute and modify it."
 
-ac_pwd='/usagers/innav/Documents/INF2610/INF2610/Lab1/inf2610-lab1-2.1'
+ac_pwd='/usagers/aiamo/Bureau/INF2610/Lab1/inf2610-lab1-2.1'
 srcdir='.'
 INSTALL='/usr/bin/install -c'
 MKDIR_P='/usr/bin/mkdir -p'
@@ -952,12 +952,12 @@ S["mkdir_p"]="$(MKDIR_P)"
 S["MKDIR_P"]="/usr/bin/mkdir -p"
 S["INSTALL_STRIP_PROGRAM"]="$(install_sh) -c -s"
 S["STRIP"]="strip"
-S["install_sh"]="${SHELL} /usagers/innav/Documents/INF2610/INF2610/Lab1/inf2610-lab1-2.1/install-sh"
-S["MAKEINFO"]="${SHELL} /usagers/innav/Documents/INF2610/INF2610/Lab1/inf2610-lab1-2.1/missing makeinfo"
-S["AUTOHEADER"]="${SHELL} /usagers/innav/Documents/INF2610/INF2610/Lab1/inf2610-lab1-2.1/missing autoheader"
-S["AUTOMAKE"]="${SHELL} /usagers/innav/Documents/INF2610/INF2610/Lab1/inf2610-lab1-2.1/missing automake-1.14"
-S["AUTOCONF"]="${SHELL} /usagers/innav/Documents/INF2610/INF2610/Lab1/inf2610-lab1-2.1/missing autoconf"
-S["ACLOCAL"]="${SHELL} /usagers/innav/Documents/INF2610/INF2610/Lab1/inf2610-lab1-2.1/missing aclocal-1.14"
+S["install_sh"]="${SHELL} /usagers/aiamo/Bureau/INF2610/Lab1/inf2610-lab1-2.1/install-sh"
+S["MAKEINFO"]="${SHELL} /usagers/aiamo/Bureau/INF2610/Lab1/inf2610-lab1-2.1/missing makeinfo"
+S["AUTOHEADER"]="${SHELL} /usagers/aiamo/Bureau/INF2610/Lab1/inf2610-lab1-2.1/missing autoheader"
+S["AUTOMAKE"]="${SHELL} /usagers/aiamo/Bureau/INF2610/Lab1/inf2610-lab1-2.1/missing automake-1.14"
+S["AUTOCONF"]="${SHELL} /usagers/aiamo/Bureau/INF2610/Lab1/inf2610-lab1-2.1/missing autoconf"
+S["ACLOCAL"]="${SHELL} /usagers/aiamo/Bureau/INF2610/Lab1/inf2610-lab1-2.1/missing aclocal-1.14"
 S["VERSION"]="2.1"
 S["PACKAGE"]="inf2610-lab1"
 S["CYGPATH_W"]="echo"
