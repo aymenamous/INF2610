@@ -2,7 +2,7 @@
 
 # libtool - Provide generalized library-building support services.
 # Generated automatically by config.status (inf2610-lab1) 2.1
-# Libtool was configured on host nanoflop:
+# Libtool was configured on host l4714-09.info.polymtl.ca:
 # NOTE: Changes made to this file will be lost: look at ltmain.sh.
 #
 #   Copyright (C) 1996, 1997, 1998, 1999, 2000, 2001, 2003, 2004, 2005,
@@ -272,10 +272,10 @@ finish_eval=""
 hardcode_into_libs=yes
 
 # Compile-time system search path for libraries.
-sys_lib_search_path_spec="/usr/lib/gcc/x86_64-pc-linux-gnu/7.1.1 /usr/lib /lib "
+sys_lib_search_path_spec="/usr/lib/gcc/x86_64-redhat-linux/6.3.1 /usr/lib64 /lib64 "
 
 # Run-time system search path for libraries.
-sys_lib_dlsearch_path_spec="/lib /usr/lib /usr/lib/libfakeroot /usr/lib/ /usr/lib/ffmpeg2.8/ /usr/lib32 "
+sys_lib_dlsearch_path_spec="/lib /usr/lib /usr/lib64/R/lib /usr/lib64/atlas /usr/lib64/bind99 /usr/lib64/codeblocks/wxContribItems /usr/lib64/dyninst /usr/lib64/iscsi include /usr/local/etc/ld.so.conf /usr/lib64/mysql /usr/lib64/nx /usr/lib64/nx/X11 /usr/lib64/octave/4.0.3 /usr/lib64/OGRE /usr/lib64/qt-3.3/lib /usr/lib64/tcl8.6 /usr/lib64/vtk "
 
 # Whether dlopen is supported.
 dlopen_support=unknown
@@ -10230,17 +10230,17 @@ file_list_spec=""
 hardcode_action=immediate
 
 # The directories searched by this compiler when creating a shared library.
-compiler_lib_search_dirs="/usr/lib/gcc/x86_64-pc-linux-gnu/7.1.1 /usr/lib/gcc/x86_64-pc-linux-gnu/7.1.1/../../../../lib /lib/../lib /usr/lib/../lib /usr/lib/gcc/x86_64-pc-linux-gnu/7.1.1/../../.."
+compiler_lib_search_dirs="/usr/lib/gcc/x86_64-redhat-linux/6.3.1 /usr/lib/gcc/x86_64-redhat-linux/6.3.1/../../../../lib64 /lib/../lib64 /usr/lib/../lib64 /usr/lib/gcc/x86_64-redhat-linux/6.3.1/../../.."
 
 # Dependencies to place before and after the objects being linked to
 # create a shared library.
-predep_objects="/usr/lib/gcc/x86_64-pc-linux-gnu/7.1.1/../../../../lib/crti.o /usr/lib/gcc/x86_64-pc-linux-gnu/7.1.1/crtbeginS.o"
-postdep_objects="/usr/lib/gcc/x86_64-pc-linux-gnu/7.1.1/crtendS.o /usr/lib/gcc/x86_64-pc-linux-gnu/7.1.1/../../../../lib/crtn.o"
+predep_objects="/usr/lib/gcc/x86_64-redhat-linux/6.3.1/../../../../lib64/crti.o /usr/lib/gcc/x86_64-redhat-linux/6.3.1/crtbeginS.o"
+postdep_objects="/usr/lib/gcc/x86_64-redhat-linux/6.3.1/crtendS.o /usr/lib/gcc/x86_64-redhat-linux/6.3.1/../../../../lib64/crtn.o"
 predeps=""
 postdeps="-lstdc++ -lm -lgcc_s -lc -lgcc_s"
 
 # The library search path used internally by the compiler when linking
 # a shared library.
-compiler_lib_search_path="-L/usr/lib/gcc/x86_64-pc-linux-gnu/7.1.1 -L/usr/lib/gcc/x86_64-pc-linux-gnu/7.1.1/../../../../lib -L/lib/../lib -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-pc-linux-gnu/7.1.1/../../.."
+compiler_lib_search_path="-L/usr/lib/gcc/x86_64-redhat-linux/6.3.1 -L/usr/lib/gcc/x86_64-redhat-linux/6.3.1/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/usr/lib/gcc/x86_64-redhat-linux/6.3.1/../../.."
 
 # ### END LIBTOOL TAG CONFIG: CXX
