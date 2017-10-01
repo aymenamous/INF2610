@@ -25,23 +25,32 @@ pthread_barrier_t barrier;
 
 pthread_t threads[2];
 
+// Pthread barrier
+// https://www.daemon-systems.org/man/pthread_barrier.3.html
+
+// Pthread mutex
+// http://www.cs.kent.edu/~ruttan/sysprog/lectures/multi-thread/pthread_mutex_init.html
+
 /*
  * Calcule pour un temp aléatoire
  */
-void random_hog()
-{
+void random_hog() {
     volatile unsigned long i, x;
     unsigned long count = random() / (1 << 20) + 10000;
     for (i = 0; i < count; i++)
         x++;
 }
 
-void * worker_foo(void *data)
-{
+void * worker_foo(void *data) {
     while(1) {
         random_hog();
-        // TODO: prendre lock_one, puis lock_two
-        // TODO: forcer l'interblocage avec la barriere
+        //--- TODO: prendre lock_one, puis lock_two
+        pthread_mutex_lock(&lock_one);  // Lock given a mutex
+        pthread_mutex_lock(&lock_two);
+        
+        //---TODO: forcer l'interblocage avec la barriere
+        pthread_barrier_wait(&barrier); // Wait on barrier ??*
+        
         x = ++y;
         printf("foo %d\n", x);
         // TODO: relacher lock_one et lock_two
@@ -49,15 +58,23 @@ void * worker_foo(void *data)
     return NULL;
 }
 
-void * worker_bar(void *data)
-{
+void * worker_bar(void *data) {
     while(1) {
         random_hog();
-        // TODO: prendre lock_two, puis lock_one
-        // TODO: forcer l'interblocage avec la barriere
+        //--- TODO: prendre lock_one, puis lock_two
+        pthread_mutex_lock(&lock_one);  // Lock given a mutex
+        pthread_mutex_lock(&lock_two);
+        
+        
+        //---TODO: forcer l'interblocage avec la barriere
+        pthread_barrier_wait(&barrier); // Wait on barrier ??*
+        
         x = ++y;
         printf("bar %d\n", x);
+        
         // TODO: relacher lock_two et lock_one
+        pthread_mutex_unlock(&lock_one);  // Release locks
+        pthread_mutex_unlock(&lock_two);
     }
     return NULL;
 }
@@ -65,8 +82,7 @@ void * worker_bar(void *data)
 /*
  * Initialisation des nombres aléatoires
  */
-void init_seed(void)
-{
+void init_seed(void) {
     struct timespec ts;
     clock_gettime(CLOCK_REALTIME, &ts);
     srandom(ts.tv_nsec);
@@ -76,11 +92,15 @@ void init_seed(void)
 /*
  * Fonction de rappel de SIGALRM
  */
-static void watchdog(int signr)
-{
+static void watchdog(int signr) {
     (void) signr;
     // TODO: Si un interblocage est detecte, alors faire appel a exit(0)
-    printf("watchdog\n");
+    if (// condition ) {
+        printf("watchdog\n");
+        exit(0);
+    } else {
+       // code
+    }
 }
 
 /*
@@ -117,11 +137,12 @@ void timer_stop() {
     setitimer(ITIMER_REAL, &timer, NULL);
 }
 
-int main(int argc, char **argv)
-{
+int main(int argc, char **argv){
     init_seed();
 
-    // TODO: initialiser lock_one et lock_two
+    //---TODO: initialiser lock_one et lock_two
+    pthread_mutex_init(&lock_one);  // Initialize locks
+    pthread_mutex_init(&lock_two);
 
     // Initialisation de la barriere
     pthread_barrier_init(&barrier, NULL, 2);
@@ -139,7 +160,9 @@ int main(int argc, char **argv)
 
     timer_stop();
 
-    // TODO: destruction des verrous lock_one et lock_two
+    //---TODO: destruction des verrous lock_one et lock_two
+    pthread_mutex_destroy(&lock_one);
+    pthread_mutex_destroy(&lock_two);
 
     printf("done\n");
     return 0;
