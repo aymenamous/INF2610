@@ -20,25 +20,38 @@ void *spinlock_main(void * data) {
     unsigned long i, j;
     struct experiment * e = data;
     for (i = 0; i < e->outer; i++) {
+        
         // TODO: verrouiller
+        lock_mini_spin(e->lock);
+        
         for (j = 0; j < e->inner; j++) {
             unsigned long idx = (i * e->inner) + j;
             statistics_add_sample(e->data, (double) idx);
         }
         // TODO: deverrouiller
+        unlock_mini_spin(e->lock);
     }
     return NULL;
 }
 
 void spinlock_init(struct experiment * e) {
     e->data = make_statistics();
+    
+    // from : http://sopa.dis.ulpgc.es/fso/cpp/intro_c/introc75.htm
     // TODO: allocation d'un long dans e->lock
+    long * lock; 
+    lock = (long*) malloc(sizeof(long));
+
     // TODO: initialisation à zéro
+    *lock = 0; 
+    e->lock = lock; 
 }
 
 void spinlock_destroy(struct experiment * e) {
     statistics_copy(e->stats, e->data);
     free(e->data);
+    
     // TODO: liberation de la memoire du verrou
+    free(e->lock);
 }
 

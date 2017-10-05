@@ -9,6 +9,7 @@ global unlock_mini_spin
 
 lock_mini_spin:              ; adresse du verrou dans rdi
     mov rcx, 1               ; valeur du verrou occupe
+
 mini_spin_lock_retry:
     xor rax, rax             ; remettre a zero rax
     lock cmpxchg [rdi], rcx  ; compare la valeur [rdi] avec rax
