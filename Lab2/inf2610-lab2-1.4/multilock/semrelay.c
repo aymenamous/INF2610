@@ -32,7 +32,8 @@ void *semrelay_main(void * data) {
         
         // from : https://www.mkssoftware.com/docs/man3/sem_post.3.asp
         // TODO: signaler le travailleur suivant
-        sem_post(&(e->lock[i+1])); 
+        if (i == (e->outer - 1)) sem_post(&(e->lock[0])); 
+        else sem_post(&(e->lock[i+1])); 
     }
     return NULL;
 }
@@ -43,15 +44,15 @@ void semrelay_init(struct experiment * e) {
     
     // from : https://stackoverflow.com/questions/26753957/how-to-dynamically-allocateinitialize-a-pthread-array
     // TODO: allocation d'un tableau de sémaphores sem_t dans e->lock
-    e->lock = malloc(sizeof(sem_t));
+    e->lock = malloc(sizeof(sem_t[e->outer]));
     
     // from : https://www.mkssoftware.com/docs/man3/sem_init.3.asp
     // TODO: initialisation des sémaphores
     // ?? not sure
-       // if i initialize all with 0 --> loops forever
-       // if i initialize all in 1 --> incorrect result
-    for (i = 0; i < e->nr_threads; i++)
-       sem_init(&(e->lock[i]), 0, 1);
+    for (i = 0; i < e->outer; i++) {
+       if (i == 0) sem_init(&(e->lock[i]), 0, 1);
+       else sem_init(&(e->lock[i]), 0, 0);
+    }
     
 }
 
@@ -64,8 +65,7 @@ void semrelay_destroy(struct experiment * e) {
        
     // from : https://www.mkssoftware.com/docs/man3/sem_destroy.3.asp
     // TODO: destruction du verrou
-    for (i = 0; i < e->nr_thread; i++)
-       sem_destroy(&(e->lock[i])); 
+    for (i = 0; i < e->outer; i++) sem_destroy(&(e->lock[i])); 
     
     // TODO: liberation de la memoire du verrou
     free(e->lock);
