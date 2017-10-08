@@ -15,5 +15,7 @@
 int main(int argc, char **argv) {
 	increment_rank();
 	whoami("foo");
+    //Execute le programme suivant en passant l'argument argv[1] qui contient le nombre de repetition
+    execlp("bar", "bar", argv[1],NULL);
 	return 0;
 }

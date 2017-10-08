@@ -19,7 +19,8 @@
  */
 
 int main(int argc, char **argv) {
-	int n = 2;
+    //Par defaut nombre de repetition 1 => afficher une seule fois baz, foo et bar
+	int n = 1;
 	if (argc == 2) {
 	    n = atoi(argv[1]);
 	}
@@ -29,13 +30,11 @@ int main(int argc, char **argv) {
 
 	increment_rank();
 	whoami("chaine");
-
+    //Variable qui contient le nombre de repetition
+    char *repetition;
+    //Conversion de n en repetition
+    asprintf(&repetition,"%d",n);
 	// Exécution de n cycles foo bar baz
-	int i;
-	for (i = 0; i < n; i++) {
-      execlp("baz", "baz", NULL);
-      execlp("foo", "foo", NULL);
-      execlp("bar", "bar", NULL);
-	}
+      execlp("baz", "baz", repetition,NULL);
 	return 0;
 }

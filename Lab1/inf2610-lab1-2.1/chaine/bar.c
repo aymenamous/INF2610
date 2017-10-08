@@ -15,5 +15,14 @@
 int main(int argc, char **argv) {
 	increment_rank();
 	whoami("bar");
+    int n = atoi(argv[1]);
+    //Verification du nombre de repetition. Si n>1 alors on reboucle en executant le programme baz
+    if (n > 1){
+        n--;
+        char *repetition;
+        //repetition prend le nouveau nombre de repetition
+        asprintf(&repetition,"%d",n);
+        execlp("baz", "baz", repetition,NULL);
+    }
 	return 0;
 }
