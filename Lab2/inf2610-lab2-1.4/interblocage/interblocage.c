@@ -44,7 +44,7 @@ void * worker_foo(void *data) {
     
         
         // TODO: forcer l'interblocage avec la barriere
-        pthread_barrier_wait(&barrier);
+        //pthread_barrier_wait(&barrier);
         
         x = ++y;
         printf("foo %d\n", x);
@@ -65,7 +65,7 @@ void * worker_bar(void *data) {
         pthread_mutex_lock(&lock_two);
         
         // TODO: forcer l'interblocage avec la barriere
-        pthread_barrier_wait(&barrier);
+        //pthread_barrier_wait(&barrier);
         
         x = ++y;
         printf("bar %d\n", x);
@@ -93,8 +93,12 @@ void init_seed(void) {
 static void watchdog(int signr) {
     (void) signr;
     // TODO: Si un interblocage est detecte, alors faire appel a exit(0)
-    printf("watchdog\n");
-}
+    if ( x == y) {
+       printf("watchdog\n");
+       exit(0);
+    } else x = y;
+    
+}      
 
 /*
  * Démarrage du timer
