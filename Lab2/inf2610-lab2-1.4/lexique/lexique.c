@@ -89,9 +89,12 @@ static void parse_opts(int argc, char **argv, struct opts *opts) {
  * Prototype: void handler (int signum)
  */
 void handle_quit(int signum) {
+    int ret;
     printf("SIGINT\n");
     if (started) {
         // TODO: Envoyer un long == -1 sur fd_word_len pour que task_frequency()
+	long nbr = -1;
+	ret = write(fd_word_len[1],&nbr,sizeof(long));
         //       imprime les resultats
     }
     exit(0);
@@ -103,7 +106,15 @@ int main(int argc, char **argv) {
     parse_opts(argc, argv, opts);
 
     // TODO: Creation des tubes fd_word_len et fd_word_str avec pipe()
-
+    //Si la creation de la pipe echoue, afficher message d'erreur et sortir du programme
+    if(pipe(fd_word_len) == -1){	
+	fprintf(stderr, "pipe failed\n");
+        exit(0);
+    }
+    if (pipe(fd_word_str) == -1){
+	fprintf(stderr, "pipe failed\n");
+        exit(0);
+    }
     /*
      * Demarrage de task_tokenize()
      */
@@ -115,16 +126,23 @@ int main(int argc, char **argv) {
         break;
     case 0:
         // TODO: Fermer les descripteurs de lecture
+	close(fd_word_len[0]);
+	close(fd_word_str[0]);
         // TODO: Appel a task_tokenize(int stdin,
         //                             int output_word_len,
         //                             int output_word_str);
+	task_tokenize(STDIN_FILENO,fd_word_len[1],fd_word_str[1]);
         // TODO: Fermer les descripteurs d'ecriture
-
+	close(fd_word_len[1]);
+	close(fd_word_str[1]);
         fprintf(stderr, "task_tokenize done\n");
         exit(0);
         break;
     default:
         // TODO: Fermer les descripteurs qui ne sont plus requis dans le parent
+	//Le parent continue d'utiliser le descripteur d'ecriture de fd_word_str = A ne pas fermer
+	//les descripteurs de lecture de fd_word_str et de fd_word_len vont etre utilises pour le deuxieme processus = A ne pas fermer
+	close(fd_word_str[1]);
         break;
     }
 
@@ -140,16 +158,24 @@ int main(int argc, char **argv) {
         // Desactivation de SIGINT
         signal(SIGINT, SIG_IGN);
         // TODO: Fermer les descripteurs d'ecriture
+	close(fd_word_len[1]);
+	close(fd_word_str[1]);
         // TODO: Appel a task_frequency(int input_word_len,
         //                             int input_word_str,
         //                             int stdout)
+	task_frequency(fd_word_len[0], fd_word_str[0],STDOUT_FILENO);
         // TODO: Fermer les descripteurs de lecture
-
+	close(fd_word_len[0]);
+	close(fd_word_str[0]);
         fprintf(stderr, "task_frequency done\n");
         exit(0);
         break;
     default:
         // TODO: Fermer les descripteurs qui ne sont plus requis dans le parent
+	//Le parent continue d'utiliser le descripteur d'ecriture de fd_word_str = A ne pas fermer
+	//Les descripteurs read ne seront plus utilises donc on les ferme
+	close(fd_word_len[0]);
+	close(fd_word_str[0]);
         break;
     }
 
