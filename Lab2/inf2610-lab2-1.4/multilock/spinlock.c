@@ -28,6 +28,7 @@ void *spinlock_main(void * data) {
             unsigned long idx = (i * e->inner) + j;
             statistics_add_sample(e->data, (double) idx);
         }
+        
         // TODO: deverrouiller
         unlock_mini_spin(e->lock);
     }
