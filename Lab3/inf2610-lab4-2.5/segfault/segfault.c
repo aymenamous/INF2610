@@ -65,6 +65,16 @@ void memory_scan(void *data, int direction) {
      * Lecture seulement de la mémoire. Si le balayage écrase de la mémoire
      * utile au programme, alors il se peut que son comportement soit modifié.
      */
+    i = 0;
+    offset = -1;
+    do{
+        offset++;
+        i += direction;
+        addr = start + i;
+        __sync_synchronize();
+        bidon = *addr;
+    }while(1);
+    
 
     printf("No segfault!\n");
     return;
@@ -87,10 +97,11 @@ int main(int argc, char **argv) {
     dir = atoi(argv[1]);
 
     // TODO: enregister fonction segfault_handler au signal SIGSEGV
-
+    signal(SIGSEGV,segfault_handler);
     save_maps();
 
     // TODO: appel à memory_scan()
+    memory_scan( myptr,dir);
 
     printf("done\n");
     return 0;

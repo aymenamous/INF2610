@@ -24,6 +24,18 @@ void save_page(char *fname, void *ptr) {
      * 3 - écrire la page dans le fichier
      * 4 - fermer le fichier
      */
+    char *start = (char *)ptr;
+    if (open(fname,'w')){
+        printf(fname,"%s",*start);
+    }
+    else{
+        printf("Impossible d'ouvrir le fichier");
+        exit(0);
+    }
+    close(fname);
+    // utiliser write car elle a argumenet debut de page - fin page
+    //l'adresse obtenue n'est pas forcement celle du debut
+    //need to get page size
 
     return;
 }
