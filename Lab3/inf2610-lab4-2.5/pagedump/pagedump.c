@@ -24,19 +24,25 @@ void save_page(char *fname, void *ptr) {
      * 3 - écrire la page dans le fichier
      * 4 - fermer le fichier
      */
-    char *start = (char *)ptr;
-    if (open(fname,'w')){
-        printf(fname,"%s",*start);
-    }
-    else{
-        printf("Impossible d'ouvrir le fichier");
-        exit(0);
-    }
-    close(fname);
-    // utiliser write car elle a argumenet debut de page - fin page
-    //l'adresse obtenue n'est pas forcement celle du debut
-    //need to get page size
+//    char *start = (char *)ptr;
+   // adresse sur 32 bits
+     // 12 derniers bits = offset
+    unsigned long addr = (unsigned long) ptr;
+    unsigned long mask = 0xFFFFFFFFFFFFF000;
+    unsigned long newPtr = (addr & mask);
+    //printf("%p --> ", ptr);
+    //printf("%p\n", newPtr);
 
+    int file = open(fname,O_CREAT | O_WRONLY,777);
+    if (file!=-1)
+    {
+	write(file, newPtr, 4096);
+    }
+    else
+    {
+	printf("Impossible d'ouvrir le fichier");
+    }
+    close(file);
     return;
 }
 

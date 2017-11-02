@@ -1,0 +1,24 @@
+00400000-00401000 r-xp 00000000 08:01 787215                             /home/aymen/Desktop/INF2610/INF2610/Lab3/inf2610-lab4-2.5/segfault/segfault
+00601000-00602000 r--p 00001000 08:01 787215                             /home/aymen/Desktop/INF2610/INF2610/Lab3/inf2610-lab4-2.5/segfault/segfault
+00602000-00603000 rw-p 00002000 08:01 787215                             /home/aymen/Desktop/INF2610/INF2610/Lab3/inf2610-lab4-2.5/segfault/segfault
+00dc8000-00e8e000 rw-p 00000000 00:00 0                                  [heap]
+7f73ba158000-7f73ba318000 r-xp 00000000 08:01 919122                     /lib/x86_64-linux-gnu/libc-2.23.so
+7f73ba318000-7f73ba518000 ---p 001c0000 08:01 919122                     /lib/x86_64-linux-gnu/libc-2.23.so
+7f73ba518000-7f73ba51c000 r--p 001c0000 08:01 919122                     /lib/x86_64-linux-gnu/libc-2.23.so
+7f73ba51c000-7f73ba51e000 rw-p 001c4000 08:01 919122                     /lib/x86_64-linux-gnu/libc-2.23.so
+7f73ba51e000-7f73ba522000 rw-p 00000000 00:00 0 
+7f73ba522000-7f73ba53a000 r-xp 00000000 08:01 919105                     /lib/x86_64-linux-gnu/libpthread-2.23.so
+7f73ba53a000-7f73ba739000 ---p 00018000 08:01 919105                     /lib/x86_64-linux-gnu/libpthread-2.23.so
+7f73ba739000-7f73ba73a000 r--p 00017000 08:01 919105                     /lib/x86_64-linux-gnu/libpthread-2.23.so
+7f73ba73a000-7f73ba73b000 rw-p 00018000 08:01 919105                     /lib/x86_64-linux-gnu/libpthread-2.23.so
+7f73ba73b000-7f73ba73f000 rw-p 00000000 00:00 0 
+7f73ba73f000-7f73ba765000 r-xp 00000000 08:01 919100                     /lib/x86_64-linux-gnu/ld-2.23.so
+7f73ba945000-7f73ba948000 rw-p 00000000 00:00 0 
+7f73ba962000-7f73ba964000 rw-p 00000000 00:00 0 
+7f73ba964000-7f73ba965000 r--p 00025000 08:01 919100                     /lib/x86_64-linux-gnu/ld-2.23.so
+7f73ba965000-7f73ba966000 rw-p 00026000 08:01 919100                     /lib/x86_64-linux-gnu/ld-2.23.so
+7f73ba966000-7f73ba967000 rw-p 00000000 00:00 0 
+7ffcee3b6000-7ffcee3d7000 rw-p 00000000 00:00 0                          [stack]
+7ffcee3d8000-7ffcee3da000 r--p 00000000 00:00 0                          [vvar]
+7ffcee3da000-7ffcee3dc000 r-xp 00000000 00:00 0                          [vdso]
+ffffffffff600000-ffffffffff601000 r-xp 00000000 00:00 0                  [vsyscall]

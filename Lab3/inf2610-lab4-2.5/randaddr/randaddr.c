@@ -115,6 +115,16 @@ main(int argc, char **argv) {
          * puis exécuter la commande passée en argument (voir vars->prog et vars->args).
          * ATTENTION: bien s'assurer de traiter l'argument vars->dry_run
          */
+	//En mode non dry-run => activer la randomisation
+	if(vars->dry_run==0)
+	{
+	    personality(ADDR_NO_RANDOMIZE );
+	}
+	//Executer le programme
+	execl( vars->prog, *vars->args, NULL );
+
+
+	
         break;
     default:
         wait(NULL);
