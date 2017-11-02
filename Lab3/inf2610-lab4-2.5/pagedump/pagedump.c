@@ -24,19 +24,21 @@ void save_page(char *fname, void *ptr) {
      * 3 - écrire la page dans le fichier
      * 4 - fermer le fichier
      */
-//    char *start = (char *)ptr;
-   // adresse sur 32 bits
-     // 12 derniers bits = offset
-    unsigned long addr = (unsigned long) ptr;
-    unsigned long mask = 0xFFFFFFFFFFFFF000;
-    unsigned long newPtr = (addr & mask);
-    //printf("%p --> ", ptr);
-    //printf("%p\n", newPtr);
-
-    int file = open(fname,O_CREAT | O_WRONLY,777);
+    //Prendre l'adresse
+    long addr = (long)ptr;
+    //Prendre la taille de la page
+    long page_size = sysconf(_SC_PAGESIZE);
+    //Trouver le debut de la page
+    long page_start = addr & ~(page_size-1);
+    //Creer le fichier fname et permettre l'utilisateur actuel de lire, d'ecrire et d'executer le fichier
+    creat(fname,S_IRWXU);
+    //Ouvrir le fichier en mode ecriture
+    int file = open(fname,O_WRONLY);
+    //Si l'ouverture est un succes	
     if (file!=-1)
     {
-	write(file, newPtr, 4096);
+	//Ecrire l'adresse du debut de page
+	write(file, page_start, page_size);
     }
     else
     {
