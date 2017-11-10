@@ -28,9 +28,22 @@ experiences = {
         "block-size": "huge",
         "block-count": 150,
         "fill": False },
+
     "heap_fill_huge": {
         "where": "heap",
         "block-size": "huge",
+        "block-count": 150,
+        "fill": True },
+
+    "stack_nofill_page": {
+        "where": "stack",
+        "block-size": "page",
+        "block-count": 150,
+        "fill": False },
+
+    "stack_fill_page": {
+        "where": "stack",
+        "block-size": "page",
         "block-count": 150,
         "fill": True },
 }
