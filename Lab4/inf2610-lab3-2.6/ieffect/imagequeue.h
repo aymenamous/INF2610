@@ -1,0 +1,27 @@
+#ifndef IMAGEQUEUE_H
+#define IMAGEQUEUE_H
+
+#include <QObject>
+#include <QQueue>
+#include <windows.h>
+
+class QImage;
+
+class ImageQueue : public QObject
+{
+    Q_OBJECT
+public:
+    explicit ImageQueue(QObject *parent = 0, int capacity = 4);
+    ~ImageQueue();
+    void enqueue(QImage *item);
+    QImage *dequeue();
+    bool isEmpty();
+private:
+    int m_capacity;
+    HANDLE hSem1;         // enqueue semaphore
+    HANDLE hSem2;         // dequeue semaphore
+    HANDLE hLock;         // verrou
+    QQueue<QImage*> queue; // queue d images
+};
+
+#endif // IMAGEQUEUE_H
