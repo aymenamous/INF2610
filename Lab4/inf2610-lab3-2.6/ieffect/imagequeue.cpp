@@ -12,16 +12,13 @@ ImageQueue::ImageQueue(QObject *parent, int capacity) :
     // https://stackoverflow.com/questions/11706985/win32-thread-safe-queue-implementation-using-native-windows-api
     // http://www.cs.wustl.edu/~schmidt/win32-cv-1.html
 
-    // CreateSemaphore :
-    // ARGS : security, init val, fina val, anonym
-
+    // CreateSemaphore(security, init val, fina val, anonym)
     // semaphore enqueue
     hSem1 = CreateSemaphore(NULL, capacity, capacity, NULL);
     // semaphore dequeue
     hSem2 = CreateSemaphore(NULL, capacity, capacity, NULL);
 
-    // CreateMutex :
-    // ARGS : security, owned, unnamed
+    // CreateMutex(security, owned, unnamed)
     hLock = CreateMutex(NULL, FALSE, NULL);
 }
 
@@ -59,7 +56,7 @@ QImage *ImageQueue::dequeue()
     waitResult = WaitForSingleObject(hLock, INFINITE);
 
     if (waitResult == WAIT_OBJECT_0) {
-         QImage* item = queue.dequeue();
+         queue.dequeue();
          // tracer la taille de la file lorsqu'elle change
          SimpleTracer::writeEvent(this, 0);
          // Liberer mutex (release ownership)
