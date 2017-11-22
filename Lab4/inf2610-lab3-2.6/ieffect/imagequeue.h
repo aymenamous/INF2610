@@ -18,9 +18,8 @@ public:
     bool isEmpty();
 private:
     int m_capacity;
-    HANDLE hSem1;          // enqueue semaphore
-    HANDLE hSem2;          // dequeue semaphore
-    HANDLE hLock;          // verrou
+    // enqueue semaphore, dequeue semaphore & verrou
+    HANDLE hSem1, hSem2, hLock;
     QQueue<QImage*> queue; // queue d images
 };
 

@@ -11,7 +11,7 @@ ImageQueue::ImageQueue(QObject *parent, int capacity) :
 {
     // https://stackoverflow.com/questions/11706985/win32-thread-safe-queue-implementation-using-native-windows-api
     // http://www.cs.wustl.edu/~schmidt/win32-cv-1.html
-
+    // HANDLE hSem1, hSem2, hLock;
     // CreateSemaphore(security, init val, fina val, anonym)
     // semaphore enqueue
     hSem1 = CreateSemaphore(NULL, capacity, capacity, NULL);
