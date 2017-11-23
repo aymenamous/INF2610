@@ -32,12 +32,15 @@ ImageQueue::~ImageQueue()
 
 void ImageQueue::enqueue(QImage *item)
 {
-    DWORD waitResult;
-    // Attendre
-    WaitForSingleObject(hSem1, INFINITE);
-    waitResult = WaitForSingleObject(hLock, INFINITE);
+    // DWORD waitResult;
 
-    if (waitResult == WAIT_OBJECT_0) {
+    WaitForSingleObject(hSem1, INFINITE);
+
+    // waitResult = WaitForSingleObject(hLock, INFINITE);
+
+    WaitForSingleObject(hLock, INFINITE);
+
+    // if (waitResult == WAIT_OBJECT_0) {
          queue.enqueue(item);
          // tracer la taille de la file lorsqu'elle change
          SimpleTracer::writeEvent(this, 0);
@@ -45,27 +48,26 @@ void ImageQueue::enqueue(QImage *item)
          ReleaseMutex(hLock);
          // Incrementer valeur du semaphore
          ReleaseSemaphore(hSem1, 1, NULL);
-    }
+    //}
 }
 
-QImage *ImageQueue::dequeue()
-{
-    DWORD waitResult;
-    // Attendre
-    WaitForSingleObject(hSem2, INFINITE);
-    waitResult = WaitForSingleObject(hLock, INFINITE);
+QImage *ImageQueue::dequeue() {
 
-    if (waitResult == WAIT_OBJECT_0) {
-         queue.dequeue();
+    // DWORD waitResult;
+    WaitForSingleObject(hSem2, INFINITE);
+    //waitResult = WaitForSingleObject(hLock, INFINITE);
+    WaitForSingleObject(hLock, INFINITE);
+    //if (waitResult == WAIT_OBJECT_0) {
+         QImage* image = queue.dequeue();
          // tracer la taille de la file lorsqu'elle change
          SimpleTracer::writeEvent(this, 0);
          // Liberer mutex (release ownership)
          ReleaseMutex(hLock);
-         // Incrementer valeur du semaphore
+         // Incrementer semaphore
          ReleaseSemaphore(hSem2, 1, NULL);
-    }
+    //}
 
     // tracer la taille de la file lorsqu'elle change
     // SimpleTracer::writeEvent(this, 0);
-    return NULL;
+    return image;
 }
