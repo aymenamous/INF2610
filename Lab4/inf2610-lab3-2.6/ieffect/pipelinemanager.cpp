@@ -62,7 +62,7 @@ static void *startHelper(void *arg)
 }
 #elif defined(Q_OS_WIN)
 // TODO
-DWORD WINAPI startHelper(LPVOID arg) {
+static DWORD WINAPI startHelper(LPVOID arg) {
     PipelineStage *stage = (PipelineStage *) arg;
     qDebug() << "starting " << stage;
     stage->execute();
